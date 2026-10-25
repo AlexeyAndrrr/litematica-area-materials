@@ -1,22 +1,26 @@
 plugins {
-    id 'fabric-loom' version '1.15.5'
+    id 'fabric-loom' version '1.17.20'
 }
 
 version = project.mod_version
 group = 'dev.areamaterials'
-base { archivesName = 'litematica-area-materials-1.21.1' }
+base { archivesName = "litematica-area-materials-${project.minecraft_version}" }
 
 repositories {
     mavenCentral()
     maven { url = 'https://masa.dy.fi/maven/sakura-ryoko' }
+    maven {
+        url = 'https://maven.fallenbreath.me/releases'
+        content { includeGroupAndSubgroups('me.fallenbreath') }
+    }
 }
 
 dependencies {
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
     mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
-    modImplementation "fi.dy.masa.litematica:litematica-fabric-1.21:${project.litematica_version}"
-    modImplementation "fi.dy.masa.malilib:malilib-fabric-1.21:${project.malilib_version}"
+    modImplementation "fi.dy.masa.litematica:litematica-fabric-${project.minecraft_version}:${project.litematica_version}"
+    modImplementation "fi.dy.masa.malilib:malilib-fabric-${project.minecraft_version}:${project.malilib_version}"
     testImplementation "net.fabricmc:fabric-loader-junit:${project.loader_version}"
     testImplementation platform('org.junit:junit-bom:5.11.4')
     testImplementation 'org.junit.jupiter:junit-jupiter'

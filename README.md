@@ -1,20 +1,22 @@
 # Litematica Area Materials
 
-Select a cuboid inside a placed schematic using Litematica tool mode **10/10** and open its native material list. **Minecraft 1.21.1 / Fabric**, client-side.
+Select a cuboid inside a placed schematic using Litematica tool mode **10/10** and open its native material list. **Minecraft 1.21.11 / Fabric**, client-side.
 
-[Скачать JAR 1.1.0](https://github.com/AlexeyAndrrr/litematica-area-materials/releases/tag/v1.1.0) · [Modrinth](https://modrinth.com/mod/litematica-area-materials) · [Сообщить об ошибке](https://github.com/AlexeyAndrrr/litematica-area-materials/issues)
+[Скачать JAR 1.2.0](https://github.com/AlexeyAndrrr/litematica-area-materials/releases/tag/v1.2.0) · [Modrinth](https://modrinth.com/mod/litematica-area-materials) · [Сообщить об ошибке](https://github.com/AlexeyAndrrr/litematica-area-materials/issues)
 
-Клиентское дополнение для **Minecraft 1.21.1 / Fabric**. Позволяет выделить прямоугольную область внутри размещённой схемы и открыть стандартный список материалов Litematica только для этой области.
+Клиентское дополнение для **Minecraft 1.21.11 / Fabric**. Позволяет выделить прямоугольную область внутри размещённой схемы и открыть стандартный список материалов Litematica только для этой области.
+
+Предыдущая сборка для **Minecraft 1.21.1** доступна в [релизе 1.1.0](https://github.com/AlexeyAndrrr/litematica-area-materials/releases/tag/v1.1.0).
 
 ## Установка
 
 В папке `mods` должны находиться:
 
-- `litematica-area-materials-1.21.1-1.1.0.jar`;
-- [Litematica 0.19.61](https://modrinth.com/mod/litematica/version/o7i8oi1Z);
-- [MaLiLib 0.21.10](https://modrinth.com/mod/malilib/version/C99LEy6r).
+- `litematica-area-materials-1.21.11-1.2.0.jar`;
+- [Litematica 0.26.16](https://modrinth.com/mod/litematica/version/mengBR9D);
+- [MaLiLib 0.27.20](https://modrinth.com/mod/malilib/version/loabWpyU).
 
-Нужны Fabric Loader 0.18.4 или новее и Java 21 или новее. Fabric API этому дополнению не требуется. На сервер устанавливать дополнение не нужно. Версии Litematica и MaLiLib зафиксированы намеренно: дополнение встраивается в их внутренние меню и обработчики.
+Нужны Fabric Loader 0.20.1 или новее и Java 21 или новее. Fabric API этому дополнению не требуется. На сервер устанавливать дополнение не нужно. Версии Litematica и MaLiLib зафиксированы намеренно: дополнение встраивается в их внутренние меню и обработчики.
 
 ## Использование
 
@@ -66,13 +68,13 @@ Windows:
 gradlew.bat build
 ```
 
-Результат: `build/libs/litematica-area-materials-1.21.1-1.1.0.jar`. Не устанавливай `-sources.jar` как мод.
+Результат: `build/libs/litematica-area-materials-1.21.11-1.2.0.jar`. Не устанавливай `-sources.jar` как мод.
 
 Тесты запускаются командой `./gradlew test` через Fabric Loader JUnit. Они проверяют включённые границы, пересечения и исключение повторного подсчёта, сочетания поворотов и отражений, отрицательные размеры частей, обрезку по высоте мира применение mixin-вставок к классам Litematica, десятый режим в общем списке, циклическое переключение в обе стороны и доступность в выживании.
 
-## Проверка этой сборки
+## Статус сборки 1.2.0
 
-`gradle build` завершён успешно: 13 тестов, 0 ошибок. Проверены 1152 сочетания знаков размеров, поворотов и отражений частей схемы. Готовый JAR 1.1.0 установлен и проверен в Minecraft 1.21.1: режим «10/10 — Материалы области», кнопка под списком материалов и проверкой схемы, меню двух углов и стандартный список материалов. Выделенная передняя стена демонстрационной схемы содержит 52 предмета: 35 каменных кирпичей, 9 дубовых досок, 8 стекла. Настоящие игровые скриншоты приложены в каталоге `docs/screenshots/`.
+Порт для Minecraft 1.21.11 с Litematica 0.26.16 и MaLiLib 0.27.20. По просьбе владельца автоматические тесты и запуск игры для этой версии не выполнялись. Выпуск отмечен как предварительный. Тесты предыдущей версии в репозитории сохранены.
 
 ## Исходные проекты
 
@@ -86,6 +88,8 @@ gradlew.bat build
 
 ## Скриншоты
 
+Снимки ниже сделаны в предыдущей версии **1.1.0 для Minecraft 1.21.1** и показывают назначение интерфейса. Новые снимки и игровая проверка версии 1.2.0 не выполнялись.
+
 Режим палки №10 и выделение стены:
 
 ![Режим 10/10 — Материалы области](docs/screenshots/01-tool-mode-10.png)
@@ -98,4 +102,4 @@ gradlew.bat build
 
 ## Использование ИИ
 
-Код дополнения, тесты, переводы и текст страницы преимущественно созданы с помощью OpenAI Codex по требованиям владельца проекта. Скриншоты сделаны в настоящем Minecraft 1.21.1 с установленным готовым JAR 1.1.0. Сгенерированные ИИ изображения не используются.
+Код дополнения, тесты, переводы и текст страницы преимущественно созданы с помощью OpenAI Codex по требованиям владельца проекта. Скриншоты сделаны в настоящем Minecraft 1.21.1 с установленным JAR 1.1.0; версия 1.2.0 в игре не проверялась. Сгенерированные ИИ изображения не используются.

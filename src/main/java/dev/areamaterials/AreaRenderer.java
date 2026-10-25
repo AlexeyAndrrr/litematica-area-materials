@@ -1,13 +1,12 @@
 package dev.areamaterials;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import fi.dy.masa.litematica.config.Configs;
-import fi.dy.masa.litematica.render.RenderUtils;
+import fi.dy.masa.malilib.render.GuiContext;
+import fi.dy.masa.malilib.render.RenderUtils;
 import fi.dy.masa.malilib.interfaces.IRenderer;
-import fi.dy.masa.malilib.util.Color4f;
+import fi.dy.masa.malilib.util.data.Color4f;
 import fi.dy.masa.malilib.util.StringUtils;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.DrawContext;
 import org.joml.Matrix4f;
 
 public final class AreaRenderer implements IRenderer {
@@ -19,18 +18,12 @@ public final class AreaRenderer implements IRenderer {
         var placement = AreaMaterialsClient.activePlacement();
         if (placement == null || mc.world == null || mc.player == null || !Configs.Visuals.ENABLE_RENDERING.getBooleanValue()) return;
         var selection = AreaMaterialsClient.selection(placement);
-        RenderSystem.enableDepthTest();
-        RenderSystem.depthMask(false);
-        try {
-            if (selection.first != null) RenderUtils.renderBlockOutline(selection.first, 0.003f, 2f, FIRST, mc);
-            if (selection.second != null) RenderUtils.renderBlockOutline(selection.second, 0.003f, 2f, SECOND, mc);
-            if (selection.bounds() != null) RenderUtils.renderAreaOutline(selection.first, selection.second, 2f, FIRST, FIRST, FIRST, mc);
-        } finally {
-            RenderSystem.depthMask(true);
-        }
+        if (selection.first != null) RenderUtils.renderBlockOutline(selection.first, 0.003f, 2f, FIRST);
+        if (selection.second != null) RenderUtils.renderBlockOutline(selection.second, 0.003f, 2f, SECOND);
+        if (selection.bounds() != null) RenderUtils.renderAreaOutline(selection.first, selection.second, 2f, FIRST, FIRST, FIRST);
     }
 
-    @Override public void onRenderGameOverlayPost(DrawContext context) {
+    @Override public void onRenderGameOverlayPost(GuiContext context) {
         var mc = MinecraftClient.getInstance();
         if (mc.player == null || mc.options.hudHidden) return;
         var placement = AreaMaterialsClient.activePlacement();
@@ -43,7 +36,7 @@ public final class AreaRenderer implements IRenderer {
         if (!progress.isEmpty()) draw(context, progress, mc.getWindow().getScaledHeight() - 52, 0xFFFFCC66);
     }
 
-    private void draw(DrawContext context, String text, int y, int color) {
+    private void draw(GuiContext context, String text, int y, int color) {
         var font = MinecraftClient.getInstance().textRenderer;
         context.fill(6, y - 2, 12 + font.getWidth(text), y + 11, 0x99000000);
         context.drawTextWithShadow(font, text, 9, y, color);

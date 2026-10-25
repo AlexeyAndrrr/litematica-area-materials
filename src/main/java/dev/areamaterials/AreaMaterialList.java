@@ -76,7 +76,7 @@ public final class AreaMaterialList extends MaterialListBase {
         CountJob(PlacementSnapshot snapshot, ClientWorld world) {
             this.snapshot = snapshot;
             this.world = world;
-            boxes = snapshot.clippedBoxes(bounds, world.getBottomY(), world.getTopY());
+            boxes = snapshot.clippedBoxes(bounds, world.getBottomY(), world.getBottomY() + world.getHeight());
             size = boxes.stream().mapToLong(IntBox::volume).sum();
             resetCursor();
         }
