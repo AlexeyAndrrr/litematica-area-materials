@@ -1,0 +1,7 @@
+{
+  "required": true,
+  "package": "dev.areamaterials.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "client": ["ToolModeMixin", "GuiBaseAccessor", "PlacementGuiMixin", "ToolCallbackMixin", "InputHandlerMixin"],
+  "injectors": { "defaultRequire": 1 }
+}

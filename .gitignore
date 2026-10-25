@@ -1,0 +1,14 @@
+.gradle/
+build/
+run/
+.idea/
+*.iml
+
+# Local Minecraft state and macOS files
+logs/
+mods/
+config/
+saves/
+crash-reports/
+*.log
+.DS_Store
