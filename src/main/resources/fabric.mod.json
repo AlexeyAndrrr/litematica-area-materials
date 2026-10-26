@@ -3,7 +3,7 @@
   "id": "litematica_area_materials",
   "version": "${version}",
   "name": "Litematica Area Materials",
-  "description": "Select a cuboid inside a schematic with the tool item and view its Litematica material list.",
+  "description": "Select a cuboid inside a schematic and view all materials or only materials with exposed surfaces.",
   "environment": "client",
   "license": "MIT",
   "contact": {

@@ -17,15 +17,22 @@ import java.util.List;
 public final class AreaMaterialList extends MaterialListBase {
     private final SchematicPlacement placement;
     private final IntBox bounds;
+    private final boolean visibleOnly;
     private CountJob job;
 
-    public AreaMaterialList(SchematicPlacement placement, IntBox bounds) {
+    public AreaMaterialList(SchematicPlacement placement, IntBox bounds, boolean visibleOnly) {
         this.placement = placement;
         this.bounds = bounds;
+        this.visibleOnly = visibleOnly;
     }
 
-    @Override public String getName() { return placement.getName() + " [" + bounds.minX() + ", " + bounds.minY() + ", " + bounds.minZ() + "]"; }
-    @Override public String getTitle() { return StringUtils.translate("area_materials.list.title", placement.getName()); }
+    @Override public String getName() {
+        return placement.getName() + " [" + bounds.minX() + ", " + bounds.minY() + ", " + bounds.minZ() + "]"
+                + (visibleOnly ? " (" + StringUtils.translate("area_materials.visible.name") + ")" : "");
+    }
+    @Override public String getTitle() {
+        return StringUtils.translate(visibleOnly ? "area_materials.visible.title" : "area_materials.list.title", placement.getName());
+    }
 
     @Override public void reCreateMaterialList() {
         MinecraftClient mc = MinecraftClient.getInstance();
@@ -61,6 +68,7 @@ public final class AreaMaterialList extends MaterialListBase {
 
     private final class CountJob {
         final PlacementSnapshot snapshot;
+        final VisibleMaterialFilter visibility;
         final ClientWorld world;
         final List<IntBox> boxes;
         final Object2IntOpenHashMap<BlockState> total = new Object2IntOpenHashMap<>();
@@ -75,6 +83,7 @@ public final class AreaMaterialList extends MaterialListBase {
 
         CountJob(PlacementSnapshot snapshot, ClientWorld world) {
             this.snapshot = snapshot;
+            visibility = new VisibleMaterialFilter(snapshot);
             this.world = world;
             boxes = snapshot.clippedBoxes(bounds, world.getBottomY(), world.getBottomY() + world.getHeight());
             size = boxes.stream().mapToLong(IntBox::volume).sum();
@@ -97,7 +106,7 @@ public final class AreaMaterialList extends MaterialListBase {
                 if (!world.getChunkManager().isChunkLoaded(x >> 4, z >> 4)) { waiting = true; return false; }
                 pos.set(x, y, z);
                 BlockState expected = snapshot.stateAt(pos);
-                if (!expected.isAir()) {
+                if (!expected.isAir() && (!visibleOnly || visibility.isVisible(expected, pos))) {
                     total.addTo(expected, 1);
                     BlockState actual = world.getBlockState(pos);
                     if (actual.isAir()) missing.addTo(expected, 1);

@@ -23,10 +23,13 @@ public final class AreaMenu extends GuiBase {
         this.addLabel(x, y + 32, -1, 12, 0xFFFFBB55, StringUtils.translate("area_materials.point", 2, format(selection.second)));
         this.addLabel(x, y + 52, -1, 12, 0xFFBBBBBB, StringUtils.translate("area_materials.mode_hint"));
         this.addLabel(x, y + 64, -1, 12, 0xFFBBBBBB, StringUtils.translate("area_materials.cycle_hint"));
-        ButtonGeneric list = button(x, y + 76, buttonWidth, "area_materials.show", () -> AreaMaterialsClient.openList(placement, this));
+        ButtonGeneric list = button(x, y + 76, buttonWidth, "area_materials.show", () -> AreaMaterialsClient.openList(placement, this, false));
         list.setEnabled(selection.bounds() != null && placement.isEnabled());
-        button(x, y + 100, buttonWidth, "area_materials.clear", () -> { AreaMaterialsClient.clear(placement); initGui(); });
-        button(x, y + 124, buttonWidth, "area_materials.back", () -> GuiBase.openGui(this.getParent()));
+        ButtonGeneric visible = button(x, y + 100, buttonWidth, "area_materials.visible.show", () -> AreaMaterialsClient.openList(placement, this, true));
+        visible.setEnabled(selection.bounds() != null && placement.isEnabled());
+        visible.setHoverStrings(StringUtils.translate("area_materials.visible.hover").split("\n"));
+        button(x, y + 124, buttonWidth, "area_materials.clear", () -> { AreaMaterialsClient.clear(placement); initGui(); });
+        button(x, y + 148, buttonWidth, "area_materials.back", () -> GuiBase.openGui(this.getParent()));
         // Useful for selecting an internal corner in empty space.
         button(x + buttonWidth + 8, y + 18, 82, "area_materials.here1", () -> {
             if (this.mc.player != null) AreaMaterialsClient.setCorner(placement, this.mc.player.getBlockPos(), true);
@@ -36,8 +39,8 @@ public final class AreaMenu extends GuiBase {
             if (this.mc.player != null) AreaMaterialsClient.setCorner(placement, this.mc.player.getBlockPos(), false);
             initGui();
         });
-        this.addLabel(x, y + 154, -1, 12, 0xFFBBBBBB, StringUtils.translate("area_materials.help1"));
-        this.addLabel(x, y + 168, -1, 12, 0xFFBBBBBB, StringUtils.translate("area_materials.help2"));
+        this.addLabel(x, y + 178, -1, 12, 0xFFBBBBBB, StringUtils.translate("area_materials.help1"));
+        this.addLabel(x, y + 192, -1, 12, 0xFFBBBBBB, StringUtils.translate("area_materials.help2"));
     }
 
     private ButtonGeneric button(int x, int y, int width, String key, Runnable action) {

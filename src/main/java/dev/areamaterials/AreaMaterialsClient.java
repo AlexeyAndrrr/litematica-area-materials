@@ -116,11 +116,11 @@ public final class AreaMaterialsClient implements ClientModInitializer {
         GuiBase.openGui(menu);
     }
 
-    public static void openList(SchematicPlacement placement, Screen parent) {
+    public static void openList(SchematicPlacement placement, Screen parent, boolean visibleOnly) {
         Selection selection = selection(placement);
         if (!placement.isEnabled()) { message("area_materials.placement_disabled"); return; }
         if (selection.bounds() == null) { message("area_materials.incomplete"); return; }
-        AreaMaterialList materials = new AreaMaterialList(placement, selection.bounds());
+        AreaMaterialList materials = new AreaMaterialList(placement, selection.bounds(), visibleOnly);
         GuiMaterialList gui = new GuiMaterialList(materials);
         gui.setParent(parent);
         GuiBase.openGui(gui);
