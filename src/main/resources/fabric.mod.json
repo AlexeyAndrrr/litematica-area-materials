@@ -3,7 +3,7 @@
   "id": "litematica_area_materials",
   "version": "${version}",
   "name": "Litematica Area Materials",
-  "description": "Select a cuboid inside a schematic and view all materials or only materials with exposed surfaces.",
+  "description": "Area material lists with a visible-surface filter, plus wrong-state highlighting for copper and stripped-wood variants.",
   "environment": "client",
   "license": "MIT",
   "contact": {
